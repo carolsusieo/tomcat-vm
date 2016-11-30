@@ -1,0 +1,31 @@
+---
+- hosts: all
+  tasks:
+    - command: mvn clean install
+      args:
+        chdir: /vagrant/hello-spring
+        creates: /vagrant/hello-spring/target/hello-spring.war
+
+    - command: cp /vagrant/hello-spring/target/hello-spring.war /var/lib/tomcat7/webapps/
+      become: true
+      args:
+        creates: /var/lib/tomcat7/webapps/hello-spring.war
+        
+    - command: mvn clean install
+      args:
+        chdir: /vagrant/hello-carol
+        creates: /vagrant/hello-carol/target/hello-carol.war
+
+    - command: cp /vagrant/hello-carol/target/hello-carol.war /var/lib/tomcat7/webapps/
+      become: true
+      args:
+        creates: /var/lib/tomcat7/webapps/hello-carol.war
+ 
+
+    - lineinfile: dest=/etc/default/tomcat7 regexp=^JAVA_HOME= line=JAVA_HOME=/usr/lib/jvm/java-7-oracle
+      become: true
+      
+    - service: name=tomcat7 state=restarted
+      become: true
+   
+        

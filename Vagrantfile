@@ -1,10 +1,10 @@
 Vagrant.configure(2) do |config|
 
-  # A standard Ubuntu 12.04 LTS 32-bit box
+  # A standard Ubuntu 16 
 
   # For more boxes, you can look at https://atlas.hashicorp.com/boxes/search
 
-  config.vm.box = "hashicorp/precise32"
+  config.vm.box = "gbarbieru/xenial"
 
   config.vm.provision "shell", path: "vagrant_provision.sh"
 

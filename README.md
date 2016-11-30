@@ -17,11 +17,11 @@ vagrant up
 
 Your new server environment should now be running in a headless virtual machine on your local computer. The following step are performed automatically for you within the VM sandbox environment:
 
- * A complete Ubuntu 12.04 Server VM is launched in headless mode, bridged to whatever host network interface you've selected.
+ * A complete Ubuntu 16 Server VM is launched in headless mode, bridged to whatever host network interface you've selected.
  * ip address assigned is: "192.168.33.10"
- * Oracle Java 7 is installed.
+ * Oracle Java 8 is installed.
  * Apache 2 is installed
- * Tomcat 7 is installed and configured as a system service.
+ * Tomcat 8 is installed and configured as a system service.
  * Git and Maven are installed
  * uses Maven to create a 2 spring app war files, install them in tomcat and restart tomcat
 	access app from browser : 192.168.33.10:8080/hello-spring

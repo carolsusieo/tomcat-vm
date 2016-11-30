@@ -1,0 +1,4 @@
+.*
+playbook.retry
+*/target*
+!/.gitignore

@@ -6,26 +6,35 @@
         chdir: /vagrant/hello-spring
         creates: /vagrant/hello-spring/target/hello-spring.war
 
-    - command: cp /vagrant/hello-spring/target/hello-spring.war /var/lib/tomcat7/webapps/
+    - command: cp /vagrant/hello-spring/target/hello-spring.war /var/lib/tomcat8/webapps/
       become: true
       args:
-        creates: /var/lib/tomcat7/webapps/hello-spring.war
+        creates: /var/lib/tomcat8/webapps/hello-spring.war
         
     - command: mvn clean install
       args:
         chdir: /vagrant/hello-carol
         creates: /vagrant/hello-carol/target/hello-carol.war
 
-    - command: cp /vagrant/hello-carol/target/hello-carol.war /var/lib/tomcat7/webapps/
+    - command: cp /vagrant/hello-carol/target/hello-carol.war /var/lib/tomcat8/webapps/
       become: true
       args:
-        creates: /var/lib/tomcat7/webapps/hello-carol.war
+        creates: /var/lib/tomcat8/webapps/hello-carol.war
  
-
-    - lineinfile: dest=/etc/default/tomcat7 regexp=^JAVA_HOME= line=JAVA_HOME=/usr/lib/jvm/java-7-oracle
+    - name: insert/update tomcat users
+      become: true
+      blockinfile:
+        dest: /var/lib/tomcat8/conf/tomcat-users.xml
+        insertbefore: "</tomcat-users>"
+        content: |
+          <role rolename="admin-gui"/>
+          <role rolename="manager-gui"/>
+          <user username="admin" password="secret" roles="manager-gui,admin-gui"/>
+         
+    - lineinfile: dest=/etc/default/tomcat8 regexp=^JAVA_HOME= line=JAVA_HOME=/usr/lib/jvm/java-8-oracle
       become: true
       
-    - service: name=tomcat7 state=restarted
+    - service: name=tomcat8 state=restarted
       become: true
    
         

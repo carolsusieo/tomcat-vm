@@ -1,6 +1,6 @@
 
 
-Creating your own tomcat server with too applets using Vagrant and Ansible
+Creating your own tomcat server with two applets using Vagrant and Ansible
 ========
 This source code repository includes configuration files to materialize an _entire_ server implementation with all project build artifacts in a single virtual machine (VM) image from scratch, allowing you to quickly bootstrap your own local copy of the project. The server will be completely encapsulated within the created VM image.  The built-in settings support creation of a *VirtualBox*-based image on Ubuntu Linux, though with tuning of the base image you should be able to create images suitable for other hypervisors and cloud-based IaaS providers such as VMware and Amazon Web Services (AWS), respectively.
 
